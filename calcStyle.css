@@ -1,0 +1,19 @@
+/* #calc {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+ */
+html {
+  margin: 5px;
+}
+
+td#hr {
+  background-color: white;
+  background-color: black;
+  height: 5px;
+}
+
+#calc tr:nth-child(1) > td:nth-child(1) {
+  width: 120px;
+}
