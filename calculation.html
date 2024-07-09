@@ -1,9 +1,127 @@
 <!DOCTYPE html>
 <html>
   <head>
-    
+    <link rel="stylesheet" href="calcStyle.css">
+    <script src="calc.js" defer></script>
   </head>
   <body>
-    
+    <div id="calc">
+      <table>
+        <tr>
+          <td>強化前の能力値</td>
+          <td>
+            <select id="targetAbility" class="Input">
+              <option selected>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>ヒーロー</td>
+          <td>
+            <select id="chara" class="Input">
+              <option>幸運なし</option>
+              <option>幸運持ち</option>
+              <option>豪運持ち</option>
+              <option selected>アーミー</option>
+              <option>アサルト</option>
+              <option>メディック</option>
+              <option>ボマー</option>
+              <option>リーコン</option>
+              <option>ゴースト</option>
+              <option>シールド</option>
+              <option>ランチャー</option>
+              <option>インビジブル</option>
+              <option>フック</option>
+              <option>デスペラード</option>
+              <option>ミオキャット</option>
+              <option>アイアン</option>
+              <option>ケログ</option>
+              <option>ホイールレッグ</option>
+              <option>クリーミー</option>
+              <option>エアー</option>
+              <option>エレクトリック</option>
+              <option>ブレード</option>
+              <option>スウィニー</option>
+              <option>マーゴ</option>
+              <option>プラグ</option>
+              <option>チュチュ</option>
+              <option>ビベリ</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+<!--           <td>幸運のお守り</td> -->
+          <td>装飾</td>
+          <td>
+            <select id="luckAbility" class="Input">
+              <option value="0">0(持っていない)</option>
+<!--               <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option> -->
+              <option value="1">幸運のお守り(1)</option>
+              <option value="2">幸運のお守り＋2(2)</option>
+              <option value="3">幸運のお守り＋3(3)</option>
+              <option value="4">幸運のお守り＋4(4)</option>
+              <option value="5">幸運のお守り＋5(5)</option>
+              <option value="6">幸運のお守り＋6(6)</option>
+              <option value="7">幸運のお守り＋7(7)</option>
+              <option value="8">幸運のお守り＋8(8)</option>
+              <option value="9">幸運のお守り＋9(9)</option>
+            </select>
+          </td>
+        </tr>
+<!--           <td>錬金の手引き</td> -->
+          <td>アイテム</td>
+          <td>
+            <label>
+<!--               <input type="checkbox" name="guidance" value="have" class="Input" id="guidance">持っている             -->
+              <input type="checkbox" name="guidance" value="have" class="Input" id="guidance">錬金の手引き
+            </label>
+          </td>
+        </tr>
+        <tr>
+<!--         <tr>
+          <td>状態異常</td>
+          <td>
+            <label>
+              <input type="radio" name="condition" value="none" checked class="Input"/>無し
+            </label>
+            <label>
+              <input type="radio" name="condition" value="luck" class="Input" id="condition"/>幸運
+            </label>
+          </td>
+        </tr> -->
+        <tr>
+          <td>状態異常</td>
+          <td>
+            <label>
+              <input type="checkbox" name="condition" value="luck" class="Input" id="condition" />幸運
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" id="hr"></td>
+        </tr>
+        <tr>
+          <td>成功確率</td>
+          <td>
+            <input id="probability" type="text" readonly value="">
+          </td>
+        </tr>
+      </table>
+    </div>
   </body>
 </html>
