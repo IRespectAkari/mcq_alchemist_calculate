@@ -8,12 +8,29 @@ html {
   margin: 5px;
 }
 
-td#hr {
+/* td#hr {
   background-color: white;
   background-color: black;
   height: 5px;
+} */
+
+#calc tr > td:nth-child(1) {
+/*   width: 112px; */
 }
 
-#calc tr:nth-child(1) > td:nth-child(1) {
-  width: 120px;
+#calc tr > td:nth-child(2) > * {
+  /* max-width: 142px; */
+}
+
+#calc tr > td:nth-child(2) {
+  padding-right: 5px;
+}
+
+#calc tr > td:nth-child(3) > * {
+  max-width: 75px;
+}
+
+
+#calc #probability {
+  width: 45px;
 }
