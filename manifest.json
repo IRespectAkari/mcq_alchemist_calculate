@@ -1,0 +1,10 @@
+{
+  "name": "錬金術確率計算機",
+  "description": "ミチクエの錬金術確率計算",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_title": "Alchemist Calculator",
+    "default_popup": "index.html"
+  }
+}
