@@ -7,57 +7,57 @@
     <script src="calc.js" defer></script>
   </head>
   <body>
+    <div id="target">
+      モード
+      <label>
+        <input type="radio" name="targetRadio" value="Accessory" checked>装飾
+      </label>
+      <label>
+        <input type="radio" name="targetRadio" value="Item">アイテム
+      </label>
+    </div>
     <div id="calc">
       <table>
         <tr>
-          <td>強化前の能力値</td>
+          <td id="targetExplanation">強化前の能力値</td>
           <td>
-            <select id="targetAbility" class="Input">
-              <option selected>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
-              <option>7</option>
-              <option>8</option>
-            </select>
+            <select id="targetSelectbox" class="Input"></select>
           </td>
           <td>
-            <input id="targetAbilityResult" type="text" readonly value="0">
+            <input id="targetSelectboxResult" type="text" readonly value="0">
           </td>
         </tr>
         <tr>
           <td>ヒーロー</td>
           <td>
             <select id="chara" class="Input">
-              <option>幸運なし</option>
+              <option selected>幸運なし</option>
               <option>幸運持ち</option>
               <option>豪運持ち</option>
-              <option selected>アサルト</option>
-              <option>メディック</option>
-              <option>ボマー</option>
-              <option>リーコン</option>
-              <option>ゴースト</option>
-              <option>シールド</option>
-              <option>ランチャー</option>
-              <option>インビジブル</option>
-              <option>フック</option>
               <option>アーミー</option>
-              <option>デスペラード</option>
-              <option>ミオキャット</option>
               <option>アイアン</option>
-              <option>ケログ</option>
-              <option>ホイールレッグ</option>
-              <option>クリーミー</option>
+              <option>アサルト</option>
+              <option>インビジブル</option>
               <option>エアー</option>
               <option>エレクトリック</option>
-              <option>ブレード</option>
+              <option>クリーミー</option>
+              <option>ケログ</option>
+              <option>ゴースト</option>
+              <option>シールド</option>
               <option>スウィニー</option>
-              <option>マーゴ</option>
-              <option>プラグ</option>
               <option>チュチュ</option>
+              <option>デスペラード</option>
               <option>ビベリ</option>
+              <option>フック</option>
+              <option>プラグ</option>
+              <option>ブレード</option>
+              <option>ホイールレッグ</option>
+              <option>ボマー</option>
+              <option>マーゴ</option>
+              <option>ミオキャット</option>
+              <option>メディック</option>
+              <option>ランチャー</option>
+              <option>リーコン</option>
             </select>
           </td>
           <td>
@@ -96,7 +96,7 @@
           </td>
         </tr>
         <tr>
-          <td>状態異常</td>
+          <td>状態</td>
           <td>
             <label>
               <input type="checkbox" name="condition" value="luck" class="Input" id="condition" />幸運
@@ -118,7 +118,7 @@
         </tr>
       </table>
     </div>
-      <div>※リーコン、フックは幸運が◎なので、1.8としていますが、検証できていないため不確実です。</div>
-      <div>※全ての確率は検証不足なので、確率に間違いがある可能性があります。ご了承ください。</div>
+    <div>※リーコン、フックは幸運が◎なので、1.8としていますが、検証できていないため不確実です。</div>
+    <div>※全ての確率は検証不足なので、確率に間違いがある可能性があります。ご了承ください。</div>
   </body>
 </html>

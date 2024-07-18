@@ -18,6 +18,15 @@ body {
   height: 5px;
 } */
 
+div#t {
+  text-align: center;
+}
+
+#target {
+  display: flex;
+  justify-content: space-around;
+}
+
 #calc tr > td:nth-child(1) {
 /*   width: 112px; */
 }
