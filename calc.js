@@ -43,7 +43,7 @@ const itemList = [
   },
   {
     txt: `ダイヤ`,
-i    val: 95
+    val: 95
   },
   {
     txt: `プラチナ`,
