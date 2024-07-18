@@ -18,10 +18,6 @@ body {
   height: 5px;
 } */
 
-div#t {
-  text-align: center;
-}
-
 #target {
   display: flex;
   justify-content: space-around;
