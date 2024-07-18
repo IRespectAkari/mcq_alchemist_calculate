@@ -109,8 +109,25 @@ const targetExplanationTxt = document.getElementById(`targetExplanation`);
 /*************************
  * 関数
  *************************/
-function orgFloor(value, base) {
-  return Math.floor(value * base) / base;
+/* ********************************************** *
+ * 数値nを小数第range位で切り捨てる。
+ * n = 対象の数値
+ * range = 切り捨てる小数点の位置(マイナスの場合は不可)
+ * isUmeru = true: 指定rangeまでゼロ埋め, false: ゼロ埋めしない
+ * ********************************************** */
+function f(n, range, isUmeru = true) {
+  // 整数と小数で分ける
+  const s = String(n).split(".");
+  // 小数が存在しない、又は存在するがrange=0の場合、整数部分を返す
+  if (s[1] === undefined || range === 0) {
+    return s[0];
+  }
+  // isUmeruが真の場合、小数に0をrange分追加
+  if (isUmeru) {
+    s[1] += "0".repeat(range);
+  }
+  // 整数とsliceでrange分ｷﾘﾄﾘした小数を合わせて、それを返す
+  return `${s[0]}.${s[1].slice(0, range)}`;
 }
 function charaRate(name) {
   if (greadLuck.includes(name)) {
@@ -125,7 +142,6 @@ function changeMode(e) {
   targetSelectbox.innerHTML = "";
   const key = (typeof e === "string" ? e : e.target.value);
   for (let e of dataJson[key].list) {
-    // option作成
     const op = document.createElement(`option`);
     op.innerText = e.txt;
     op.value = e.val;
@@ -137,7 +153,7 @@ function changeMode(e) {
 
 // ##################################################################
 /*************************
- * 本処理
+ * 確率計算関数
  *************************/
 function calcProbability(e) {
   let resultValue = 1;
@@ -163,38 +179,19 @@ function calcProbability(e) {
   conditionLUCK_r.value = `×${array[4]}`;
 
   for (let i of array) {
-    const txt = [
-      `${i}`,
-      `${orgFloor(i, 100)}`,
-      `${resultValue}`,
-    ].join("\n");
-    // console.log(txt);
-    // resultValue *= orgFloor(i, 100);
     resultValue *= i;
   }
   resultValue /= 100;
   console.log(resultValue);
 
-  result.value = `${orgFloor(resultValue, 100)}%`;
-  const txt = [
-    `calcProbability`,
-    `キャラ : ${chara.selectedOptions[0].value}`,
-    `能力値 : ${targetSelectbox.selectedOptions[0].value}`,
-    `手引き : ${haveGuidance.checked ? "有り" : "無し"}`,
-    `お守り : ${luckAbility.selectedOptions[0].value}`,
-    `状態   : ${conditionLUCK.checked ? "幸運" : "無し"}`,
-    `成功確率 : ${resultValue}`,
-    `charaRate   : ${charaRate(charaValue)}`,
-    `targetValue : ${targetValue}`,
-  ].join("\n");
-  // console.log(txt);
+  result.value = `${f(resultValue, 2, false)}%`;
   return;
 }
 
 // ##################################################################
-/*************************
+/* *********************** *
  * 初期化処理
- *************************/
+ * *********************** */
 
 // モードを装飾モードに設定
 changeMode("Accessory");
