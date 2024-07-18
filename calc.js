@@ -16,13 +16,11 @@ const luck = [
   "インビジブル"
 ];
 
-const luckRate = 165;//      幸運の倍率
-const greadLuckRate = 180;// 豪運の倍率
-// const guidanceRate = 1.3;//  錬金の手引きの倍率
-// const conditionRate = 1.2;// 状態異常：幸運の倍率
-const guidanceRate = 13;//  錬金の手引きの倍率
-const conditionRate = 12;// 状態異常：幸運の倍率
-const luckAbilityRate = (i)=>{return `1${i}`};// 幸運のお守りの倍率
+const luckRate = 165;//      幸運の倍率(1.65)
+const greadLuckRate = 180;// 豪運の倍率(1.8)
+const guidanceRate = 13;//  錬金の手引きの倍率(1.3)
+const conditionRate = 12;// 状態異常：幸運の倍率(1.2)
+const luckAbilityRate = (i)=>{return `1${i}`};// 幸運のお守りの倍率(1.0 ~ 1.9)
 
 // 能力値の取りうる値の配列
 const abilityList = (function f(m, M) {
@@ -45,7 +43,7 @@ const itemList = [
   },
   {
     txt: `ダイヤ`,
-    val: 95
+i    val: 95
   },
   {
     txt: `プラチナ`,
@@ -165,10 +163,8 @@ function calcProbability(e) {
   const array = [
     targetValue,// 基礎成功確率
     charaRate(charaValue),// スキルによる倍率
-    // guidanceValue ? guidanceRate : 1,// 錬金の手引きの倍率
     guidanceValue ? guidanceRate : 10,// 錬金の手引きの倍率
     luckAbilityRate(luckValue),// 幸運のお守り(装飾)スキルによる倍率
-    // conditionValue ? conditionRate : 1// 状態異常：幸運による倍率
     conditionValue ? conditionRate : 10// 状態異常：幸運による倍率
   ];
 
@@ -181,7 +177,7 @@ function calcProbability(e) {
   for (let i of array) {
     resultValue *= i;
   }
-  resultValue /= 100000;
+  resultValue /= 100000;// = chara(100) * guidance(10) * luckAbility(10) * condition(10)
   console.log(resultValue);
 
   result.value = `${f(resultValue, 2, false)}%`;
