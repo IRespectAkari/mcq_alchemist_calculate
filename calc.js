@@ -70,7 +70,7 @@ const itemList = [
     val: 55
   },
 ];
-const dataJson = {
+const modeJson = {
   Accessory: {
     list: abilityList,
     explanation: `強化前の能力値`
@@ -105,26 +105,6 @@ const targetExplanationTxt = document.getElementById(`targetExplanation`);
 /*************************
  * 関数
  *************************/
-/* ********************************************** *
- * 数値nを小数第range位で切り捨てる。
- * n = 対象の数値
- * range = 切り捨てる小数点の位置(マイナスの場合は不可)
- * isUmeru = true: 指定rangeまでゼロ埋め, false: ゼロ埋めしない
- * ********************************************** */
-function f(n, range, isUmeru = true) {
-  // 整数と小数で分ける
-  const s = String(n).split(".");
-  // 小数が存在しない、又は存在するがrange=0の場合、整数部分を返す
-  if (s[1] === undefined || range === 0) {
-    return s[0];
-  }
-  // isUmeruが真の場合、小数に0をrange分追加
-  if (isUmeru) {
-    s[1] += "0".repeat(range);
-  }
-  // 整数とsliceでrange分ｷﾘﾄﾘした小数を合わせて、それを返す
-  return `${s[0]}.${s[1].slice(0, range)}`;
-}
 function charaRate(name) {
   if (greadLuck.includes(name)) {
     return greadLuckRate;
@@ -137,13 +117,13 @@ function charaRate(name) {
 function changeMode(e) {
   targetSelectbox.innerHTML = "";
   const key = (typeof e === "string" ? e : e.target.value);
-  for (let e of dataJson[key].list) {
+  for (let e of modeJson[key].list) {
     const op = document.createElement(`option`);
     op.innerText = e.txt;
     op.value = e.val;
     targetSelectbox.appendChild(op);
   }
-  targetExplanationTxt.innerText = dataJson[key].explanation;
+  targetExplanationTxt.innerText = modeJson[key].explanation;
   calcProbability();
 }
 
@@ -170,9 +150,9 @@ function calcProbability(e) {
 
   targetSelectbox_r.value = `${array[0]}%`;
   chara_r.value = `×${array[1] / 100}`;
-  haveGuidance_r.value = `×${array[2]}`;
+  haveGuidance_r.value = `×${array[2] / 10}`;
   luckAbility_r.value = `×${array[3] / 10}`;
-  conditionLUCK_r.value = `×${array[4]}`;
+  conditionLUCK_r.value = `×${array[4] / 10}`;
 
   for (let i of array) {
     resultValue *= i;
@@ -180,7 +160,7 @@ function calcProbability(e) {
   resultValue /= 100000;// = chara(100) * guidance(10) * luckAbility(10) * condition(10)
   console.log(resultValue);
 
-  result.value = `${f(resultValue, 2, false)}%`;
+  result.value = `${resultValue}%`;
   return;
 }
 

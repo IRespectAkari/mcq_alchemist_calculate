@@ -1,35 +1,20 @@
-/* #calc {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
- */
 html {
   margin: 5px;
 }
 
 body {
-  width: 293px;
+  width: 320px;
+  width: 28em;
   font-size: 12px;
 }
-
-/* td#hr {
-  background-color: white;
-  background-color: black;
-  height: 5px;
-} */
 
 #target {
   display: flex;
   justify-content: space-around;
 }
 
-#calc tr > td:nth-child(1) {
-/*   width: 112px; */
-}
-
-#calc tr > td:nth-child(2) > * {
-  /* max-width: 142px; */
+td#targetExplanation {
+  width: 8em;
 }
 
 #calc tr > td:nth-child(2) {
@@ -37,10 +22,9 @@ body {
 }
 
 #calc tr > td:nth-child(3) > * {
-  max-width: 75px;
+  width: 5em;
 }
 
-
-#calc #probability {
-  width: 45px;
+#calc input#probability {
+  width: 6.5em;
 }
