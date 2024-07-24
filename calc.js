@@ -184,3 +184,11 @@ for (let e of document.getElementsByName("targetRadio")) {
 
 // 一度だけ実行
 calcProbability();
+
+// ##################################################################
+/* *********************** *
+ * リンク有効化
+ * *********************** */
+document.querySelectorAll(`a`).forEach(e=>{e.addEventListener(`click`, e=>{
+  chrome.tabs.create({url:e.target.href});
+})});
