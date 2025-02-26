@@ -74,15 +74,23 @@ const itemList = [
 const modeJson = {
   Accessory: {
     list: abilityList,
-    explanation: `強化前の能力値`
+    explanation: `強化前の能力値`,
+    chengeover: {
+      target: [`guidance`, `notes`],
+      disable: false,
+    }
   },
   Item: {
     list: itemList,
-    explanation: `錬金するアイテム`
+    explanation: `錬金するアイテム`,
+    chengeover: {
+      target: [`guidance`, `notes`],
+      disable: true,
+    }
   }
 };
 
-// ##################################################################
+// ####################################################################################################################################
 /*************************
  * 変数取得
  *************************/
@@ -129,6 +137,20 @@ function changeMode(e) {
     targetSelectbox.appendChild(op);
   }
   targetExplanationTxt.innerText = modeJson[key].explanation;
+
+  const isDisabled = modeJson[key].chengeover.disable;
+  for (let e of modeJson[key].chengeover.target) {
+    const elm = document.getElementById(e);
+    const elm_r = document.getElementById(`${e}Result`);
+    elm.checked = false;// チェックを外す
+    elm.disabled = isDisabled;// 有効化、無効化
+    elm_r.disabled = isDisabled;// 有効化、無効化
+    elm.dispatchEvent(new Event(`change`));// イベント発火
+
+    const parent = elm.parentNode;
+    parent.style.color = isDisabled ? "gray" : "black";
+  }
+
   calcProbability();
 }
 
