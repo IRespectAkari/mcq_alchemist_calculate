@@ -18,8 +18,9 @@ const luck = [
 
 const luckRate = 165;//      幸運の倍率(1.65)
 const greadLuckRate = 180;// 豪運の倍率(1.8)
-const guidanceRate = 13;//  錬金の手引きの倍率(1.3)
-const conditionRate = 12;// 状態異常：幸運の倍率(1.2)
+const guidanceRate = 13;//   錬金の手引きの倍率(1.3)
+const notesRate = 25;//      賢者の手記の倍率(2.5)
+const conditionRate = 12;//  状態異常：幸運の倍率(1.2)
 const luckAbilityRate = (i)=>{return `1${i}`};// 幸運のお守りの倍率(1.0 ~ 1.9)
 
 // 能力値の取りうる値の配列
@@ -86,9 +87,12 @@ const modeJson = {
  * 変数取得
  *************************/
 const result = document.getElementById(`probability`);
+const totalMultiplier = document.getElementById(`totalMultiplier`);
+
 const chara = document.getElementById(`chara`);
 const targetSelectbox = document.getElementById(`targetSelectbox`);
 const haveGuidance = document.getElementById(`guidance`);
+const haveNotes = document.getElementById(`notes`);
 const luckAbility = document.getElementById(`luckAbility`);
 const conditionLUCK = document.getElementById(`condition`);
 
@@ -96,6 +100,7 @@ const conditionLUCK = document.getElementById(`condition`);
 const chara_r = document.getElementById(`charaResult`);
 const targetSelectbox_r = document.getElementById(`targetSelectboxResult`);
 const haveGuidance_r = document.getElementById(`guidanceResult`);
+const haveNotes_r = document.getElementById(`notesResult`);
 const luckAbility_r = document.getElementById(`luckAbilityResult`);
 const conditionLUCK_r = document.getElementById(`conditionResult`);
 
@@ -132,11 +137,13 @@ function changeMode(e) {
  * 確率計算関数
  *************************/
 function calcProbability(e) {
-  let resultValue = 1;
+  let resultValue = 1;//          合計確率
+  let totalMultiplierValue = 1;// 合計倍率
 
   const targetValue = targetSelectbox.selectedOptions[0].value;
   const charaValue = chara.selectedOptions[0].value;
   const guidanceValue = haveGuidance.checked;
+  const notesValue = haveNotes.checked;
   const luckValue = luckAbility.selectedOptions[0].value;
   const conditionValue = conditionLUCK.checked;
 
@@ -144,6 +151,7 @@ function calcProbability(e) {
     targetValue,// 基礎成功確率
     charaRate(charaValue),// スキルによる倍率
     guidanceValue ? guidanceRate : 10,// 錬金の手引きの倍率
+    notesValue ? notesRate : 10,// 賢者の手記の倍率
     luckAbilityRate(luckValue),// 幸運のお守り(装飾)スキルによる倍率
     conditionValue ? conditionRate : 10// 状態異常：幸運による倍率
   ];
@@ -151,16 +159,25 @@ function calcProbability(e) {
   targetSelectbox_r.value = `${array[0]}%`;
   chara_r.value = `×${array[1] / 100}`;
   haveGuidance_r.value = `×${array[2] / 10}`;
-  luckAbility_r.value = `×${array[3] / 10}`;
-  conditionLUCK_r.value = `×${array[4] / 10}`;
+  haveNotes_r.value = `×${array[3] / 10}`;
+  luckAbility_r.value = `×${array[4] / 10}`;
+  conditionLUCK_r.value = `×${array[5] / 10}`;
 
   for (let i of array) {
     resultValue *= i;
   }
-  resultValue /= 100000;// = chara(100) * guidance(10) * luckAbility(10) * condition(10)
-  console.log(resultValue);
+  resultValue /= 1000000;// = chara(100) * guidance(10) * notes(10) * luckAbility(10) * condition(10)
+  console.log(`resultValue : ${resultValue}`);
+
+  for (let i = 1; i < array.length; i++) {
+    totalMultiplierValue *= array[i];
+  }
+  totalMultiplierValue /= 1000000;// = guidance(10) * notes(10) * luckAbility(10) * condition(10)
+  console.log(`totalMultiplierValue : ${totalMultiplierValue}`);
 
   result.value = `${resultValue}%`;
+  totalMultiplier.value = `${totalMultiplierValue}倍`;
+
   return;
 }
 
